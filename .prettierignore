@@ -7,6 +7,8 @@
 .versionrc
 .env
 .env.example
+CHANGELOG.md
+README.md
 
 # Hardhat
 artifacts
