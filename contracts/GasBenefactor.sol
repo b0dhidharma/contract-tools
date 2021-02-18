@@ -22,7 +22,7 @@ abstract contract GasBenefactor is IGasBenefactor {
 
   IChiToken public override chiToken;
 
-  constructor(IChiToken _chiToken) {
+  constructor(IChiToken _chiToken) public {
     _setChiToken(_chiToken);
   }
 

@@ -5,7 +5,7 @@ pragma solidity >=0.6.2;
 import '../GasBenefactor.sol';
 
 contract GasBenefactorMock is GasBenefactor {
-  constructor(IChiToken _chiToken) GasBenefactor(_chiToken) {}
+  constructor(IChiToken _chiToken) public GasBenefactor(_chiToken) {}
 
   function trySubsidizeTx() public subsidizeUserTx {
     _wasteGas();

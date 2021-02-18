@@ -32,7 +32,7 @@ describe('GasBenefactor', () => {
       params: [
         {
           forking: {
-            jsonRpcUrl: process.env.MAINNET_HTTPS_URL,
+            jsonRpcUrl: process.env.MAINNET_HTTPS_URL as string,
             blockNumber: 11881948,
           },
         },

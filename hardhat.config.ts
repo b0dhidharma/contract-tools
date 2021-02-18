@@ -4,28 +4,10 @@ import '@nomiclabs/hardhat-etherscan';
 import { removeConsoleLog } from 'hardhat-preprocessor';
 import 'hardhat-gas-reporter';
 import 'solidity-coverage';
+import { HardhatUserConfig } from 'hardhat/config';
 
-module.exports = {
+const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
-  networks: process.env.TEST
-    ? {}
-    : {
-        hardhat: {
-          enabled: process.env.FORK ? true : false,
-          forking: {
-            url: process.env.MAINNET_HTTPS_URL,
-          },
-        },
-        localMainnet: {
-          url: process.env.LOCAL_MAINNET_HTTPS_URL,
-          accounts: [process.env.LOCAL_MAINNET_PRIVATE_KEY],
-        },
-        mainnet: {
-          url: process.env.MAINNET_HTTPS_URL,
-          accounts: [process.env.MAINNET_PRIVATE_KEY],
-          gasPrice: 'auto',
-        },
-      },
   solidity: {
     compilers: [
       {
@@ -37,10 +19,15 @@ module.exports = {
           },
         },
       },
-      {
-        version: '0.6.12',
-      },
     ],
+    overrides: {
+      'contracts/mock/GasBenefactor.sol': {
+        version: '0.6.2',
+      },
+      'contracts/GasBenefactor.sol': {
+        version: '0.6.2',
+      },
+    },
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS ? true : false,
@@ -54,3 +41,25 @@ module.exports = {
     apiKey: process.env.ETHERSCAN_API_KEY,
   },
 };
+
+if (!process.env.TEST) {
+  config.networks = {
+    hardhat: {
+      forking: {
+        enabled: process.env.FORK ? true : false,
+        url: process.env.MAINNET_HTTPS_URL as string,
+      },
+    },
+    localMainnet: {
+      url: process.env.LOCAL_MAINNET_HTTPS_URL,
+      accounts: [process.env.LOCAL_MAINNET_PRIVATE_KEY as string],
+    },
+    mainnet: {
+      url: process.env.MAINNET_HTTPS_URL,
+      accounts: [process.env.MAINNET_PRIVATE_KEY as string],
+      gasPrice: 'auto',
+    },
+  };
+}
+
+export default config;
