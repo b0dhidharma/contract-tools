@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/b0dhidharma/contract-tools/compare/v0.1.1...v0.1.2) (2021-02-18)
+
+
+### Features
+
+* gasbenefactor compiled with lowest pragma required ([df17437](https://github.com/b0dhidharma/contract-tools/commit/df17437d4920d91274933871e3bc85303d906620))
+
 ### [0.1.1](https://github.com/b0dhidharma/contract-tools/compare/v0.1.0...v0.1.1) (2021-02-18)
 
 
