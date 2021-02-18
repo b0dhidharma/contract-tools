@@ -17,7 +17,7 @@ describe('GasBenefactor', () => {
   before('Setup accounts and contracts', async () => {
     [owner] = await ethers.getSigners();
     chiTokenContract = await ethers.getContractFactory(
-      'contracts/mock/ChiToken.sol:ChiTokenMock'
+      'contracts/test/ChiToken.sol:ChiToken'
     );
     gasBenefactorContract = await ethers.getContractFactory(
       'contracts/mock/GasBenefactor.sol:GasBenefactorMock'
@@ -141,7 +141,7 @@ describe('GasBenefactor', () => {
     });
   });
   // ChiToken still doesnt work for local environments
-  describe.skip('subsidizeTx', () => {
+  describe('subsidizeTx', () => {
     context('when there is no chi subsidized in contract', () => {
       it('doesnt make transaction cheaper', async () => {
         const firstTx: TransactionResponse = await gasBenefactor.trySubsidizeTx();
@@ -154,9 +154,9 @@ describe('GasBenefactor', () => {
       });
     });
     context('when there is chi subsidized in contract', () => {
-      const chiMinted = utils.parseEther('10');
+      const chiMinted = ethers.BigNumber.from('140');
       beforeEach(async () => {
-        await chiToken.freeMint(chiMinted);
+        await chiToken.mint(chiMinted);
         await chiToken.approve(gasBenefactor.address, chiMinted);
       });
       it('makes transaction cheaper', async () => {
@@ -173,7 +173,7 @@ describe('GasBenefactor', () => {
   });
 
   // ChiToken still doesnt work for local environments
-  describe.skip('discountTx', () => {
+  describe('discountTx', () => {
     const chiMinted = ethers.BigNumber.from('140');
     beforeEach(async () => {
       await chiToken.mint(chiMinted);
