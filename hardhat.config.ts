@@ -38,7 +38,7 @@ module.exports = {
         },
       },
       {
-        version: '0.5.17',
+        version: '0.6.12',
       },
     ],
   },
