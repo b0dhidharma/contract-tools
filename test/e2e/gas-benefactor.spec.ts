@@ -19,6 +19,13 @@ describe('GasBenefactor', () => {
     );
   });
 
+  after(async () => {
+    await network.provider.request({
+      method: 'hardhat_reset',
+      params: [],
+    });
+  });
+
   beforeEach('Deploy necessary contracts', async () => {
     await network.provider.request({
       method: 'hardhat_reset',

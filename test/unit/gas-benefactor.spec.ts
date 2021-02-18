@@ -78,9 +78,9 @@ describe('GasBenefactor', () => {
     });
   });
   describe('subsidize', () => {
-    const chiMinted = utils.parseEther('1');
+    const chiMinted = ethers.BigNumber.from('140');
     beforeEach(async () => {
-      await chiToken.freeMint(chiMinted);
+      await chiToken.mint(chiMinted);
     });
     context('when amount is zero', () => {
       it('reverts with message', async () => {
