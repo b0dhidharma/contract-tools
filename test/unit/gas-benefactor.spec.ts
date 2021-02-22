@@ -1,14 +1,14 @@
+import ChiTokenContract from "@gnosis.pm/testable-chi-token/build/artifacts/src/contracts/ChiToken.sol/ChiToken.json";
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/dist/src/signer-with-address';
 import { expect } from 'chai';
 import { TransactionResponse } from '@ethersproject/abstract-provider';
 import { Contract, ContractFactory, utils } from 'ethers';
-import { ethers } from 'hardhat';
+import { waffle, ethers } from 'hardhat';
 import { behaviours, constants } from '../utils';
 
 describe('GasBenefactor', () => {
   let owner: SignerWithAddress;
 
-  let chiTokenContract: ContractFactory;
   let chiToken: Contract;
 
   let gasBenefactorContract: ContractFactory;
@@ -16,16 +16,13 @@ describe('GasBenefactor', () => {
 
   before('Setup accounts and contracts', async () => {
     [owner] = await ethers.getSigners();
-    chiTokenContract = await ethers.getContractFactory(
-      'contracts/test/ChiToken.sol:ChiToken'
-    );
     gasBenefactorContract = await ethers.getContractFactory(
       'contracts/mock/GasBenefactor.sol:GasBenefactorMock'
     );
   });
 
   beforeEach('Deploy necessary contracts', async () => {
-    chiToken = await chiTokenContract.deploy();
+    chiToken = await waffle.deployContract(owner, ChiTokenContract);
     gasBenefactor = await gasBenefactorContract.deploy(chiToken.address);
   });
 
