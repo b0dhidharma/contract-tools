@@ -1,11 +1,11 @@
 // SPDX-License-Identifier: AGPL-3.0
 
-pragma solidity >=0.6.2;
+pragma solidity ^0.8.0;
 
 import '../GasBenefactor.sol';
 
 contract GasBenefactorMock is GasBenefactor {
-  constructor(IChiToken _chiToken) public GasBenefactor(_chiToken) {}
+  constructor(IChiToken _chiToken) GasBenefactor(_chiToken) {}
 
   function trySubsidizeTx() public subsidizeUserTx {
     _wasteGas();

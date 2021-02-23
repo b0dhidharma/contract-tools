@@ -11,7 +11,7 @@ const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.7.6',
+        version: '0.8.1',
         settings: {
           optimizer: {
             enabled: true,
@@ -19,15 +19,7 @@ const config: HardhatUserConfig = {
           },
         },
       },
-    ],
-    overrides: {
-      'contracts/mock/GasBenefactor.sol': {
-        version: '0.6.2',
-      },
-      'contracts/GasBenefactor.sol': {
-        version: '0.6.2',
-      },
-    },
+    ]
   },
   gasReporter: {
     enabled: process.env.REPORT_GAS ? true : false,
